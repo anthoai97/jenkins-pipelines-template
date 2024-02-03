@@ -4,6 +4,6 @@ void before() {
 }
 
 @AfterStep
-void after() {
+void after({ hookContext.step.equals("static_code_analysis") }) {
     println "Splunk: running after the ${hookContext.library} library's ${hookContext.step} step" 
 }
