@@ -10,13 +10,12 @@ void call() {
                     env.PATH = "${env.WORKSPACE}/bin:${env.PATH}"
                 }
             }
+            
+            steps {
+                // Run Gitleaks to check for secrets
+                sh '''
+                gitleaks detect --source . --verbose
+                ''' 
+            }
         }
-    stage('Run Gitleaks') {
-        steps {
-            // Run Gitleaks to check for secrets
-            sh '''
-            gitleaks detect --source . --verbose
-            ''' 
-        }
-    }
 }
