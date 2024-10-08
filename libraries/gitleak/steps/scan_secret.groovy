@@ -1,5 +1,22 @@
 void call() {
-    stage("GitLeak: Secret Scan") {
-        println "Secrect Scanning...."
+    stage('Setup Gitleaks') {
+            steps {
+                script {
+                    def gitleaksInstalled = sh(returnStatus: true, script: 'which gitleaks > /dev/null') == 0
+                        
+                    if (!gitleaksInstalled) {
+                            sh 'mkdir -p bin'
+                            sh 'curl -sfL https://install.goreleaser.com/github.com/zricethezav/gitleaks.sh | sh -s -- -b bin'                }
+                    env.PATH = "${env.WORKSPACE}/bin:${env.PATH}"
+                }
+            }
+        }
+    stage('Run Gitleaks') {
+        steps {
+            // Run Gitleaks to check for secrets
+            sh '''
+            gitleaks detect --source . --verbose
+            ''' 
+        }
     }
 }

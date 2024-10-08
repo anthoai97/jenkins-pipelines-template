@@ -1,5 +1,5 @@
 void call() {
-    stage("GitLeak: Secret Scan Complete") {
+    stage("GitLeak: Secret Scan Completed") {
         println "Secret Scan completed ......"
     }
 }
