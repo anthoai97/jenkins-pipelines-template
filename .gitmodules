@@ -1,0 +1,3 @@
+[submodule "defectdojo"]
+	path = defectdojo
+	url = https://github.com/anthoai97/django-DefectDojo.git

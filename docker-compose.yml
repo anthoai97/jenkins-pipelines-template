@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  jenkins:
+    build:
+      context: ./jenkins
+      dockerfile: Dockerfile
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - "./data/jenkins-data:/var/jenkins_home"
+      - "./data/jenkins-docker-certs:/certs/client:ro"
+    networks:
+      - devsecops
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    networks:
+      - devsecops
+
+networks:
+  devsecops:
+    driver: bridge

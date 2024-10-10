@@ -15,9 +15,10 @@ docker run --name jenkins \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v "${PWD}/data/jenkins-data:/var/jenkins_home" \
     -v "${PWD}/data/jenkins-docker-certs:/certs/client:ro" \
+    --rm
     --privileged \
     --user root \
     -p 50000:50000 \
     -p 8080:8080 \
-    jenkins:lts-docker
+    jenkins-sec:lts-docker
 ``` 
